@@ -1,74 +1,38 @@
-# Teste de admissão para o LEDS
+# Documentação de Solução para o Sistema de Busca de Concursos e Candidatos
 
-O desafio é desenvolver um programa que permita realizar as seguintes buscas: 
-1. Listar os **órgãos, códigos e editais dos concursos públicos** que se encaixam no perfil do candidato, tomando como base o seu **CPF**; 
-2. Listar o **nome, data de nascimento e o CPF** dos candidatos que se encaixam no perfil do concurso tomando com base o **Código do Concurso** do concurso público;
+## Visão Geral
+O sistema permite a interação entre candidatos e concursos públicos a partir de informações armazenadas em arquivos de texto. Através de um menu no terminal, o usuário pode:
+- Buscar concursos compatíveis com o perfil de um candidato, usando o CPF do candidato.
+- Buscar candidatos compatíveis com as vagas de um concurso, usando o código do concurso.
 
-O arquivo **candidatos.txt** contém as informações dos candidatos:
+## Arquivos de Entrada
+O sistema utiliza dois arquivos de texto para armazenar as informações necessárias:
 
-| Nome  | Data de Nascimento  | CPF |  Profissões|
-|---|---|---|---|
-| Lindsey Craft  |  19/05/1976  |  182.845.084-34  |  [carpinteiro]  | 
-| Jackie Dawson  |  14/08/1970  |  311.667.973-47  |  [marceneiro, assistente administrativo]  |
-| Cory Mendoza |   11/02/1957 |  565.512.353-92  |  [carpinteiro, marceneiro] |
+1. **`candidatos.txt`**:
+   - Formato: `Nome Sobrenome DD/MM/AAAA CPF [profissao1, profissao2, ...]`.
 
-O arquivo **concursos.txt** contém as informações dos concursos públicos:
+2. **`concursos.txt`**:
+   - Formato: `Órgão Edital Código [vagas1, vagas2, ...]`.
 
-| Órgão  | Edital  | Código do Concurso | Lista de vagas|
-|---|---|---|---|
-| SEDU  | 9/2016  |  61828450843  |  [analista de sistemas, marceneiro]  | 
-| SEJUS | 15/2017  |  61828450843  |  [carpinteiro,professor de matemática,assistente administrativo] |
-| SEJUS | 17/2017 |  95655123539  |  [professor de matemática] |
+## Funcionamento do Sistema
 
-**Escolha as tecnologias que você usará e monte uma solução completa para rodar a aplicação**.
+### 1. Leitura e Processamento dos Dados
+O sistema utiliza expressões regulares para processar os arquivos `candidatos.txt` e `concursos.txt`. A função `ler_candidatos_do_arquivo` lê as informações dos candidatos e as armazena em um dicionário, usando o CPF como chave. A função `ler_concursos_do_arquivo` realiza a leitura dos dados dos concursos e os armazena em um dicionário, usando o código do concurso como chave.
 
-Para enviar o resultado, basta realizar um **Fork** deste repositório e **abrir um Pull Request** **com seu nome e o número de inscrição**.  
+### 2. Menu Interativo
+O usuário interage com o programa através de um menu de opções:
+- **Opção 1**: Buscar Concursos por Candidato.
+- **Opção 2**: Buscar Candidatos por Concurso.
+- **Opção 3**: Encerrar o Programa.
 
-**Atenção: você deve enviar apenas o código fonte. Não serão aceitos códigos compilados**.
+Dependendo da escolha, o sistema solicita a entrada de dados do usuário (CPF ou código do concurso) e exibe os resultados diretamente no terminal.
 
-Por fim, você deve atualizar o Readme.md com as seguintes informações: 
-1. Documentação da solução;
-2. Lista dos diferenciais implementados. 
+### 3. Busca de Concursos Compatíveis com o Candidato
+Ao selecionar a opção 1, o programa solicita o CPF do candidato e exibe os concursos cujo perfil de vagas (profissões) seja compatível com as profissões do candidato.
 
+### 4. Busca de Candidatos Compatíveis com o Concurso
+Ao selecionar a opção 2, o programa solicita o código do concurso e exibe os candidatos cujo perfil de profissões seja compatível com as vagas do concurso.
 
-## Avaliação
+## Conclusão
 
-O programa será avaliado levando em conta os seguintes critérios:
-
-| Critério  | Valor | 
-|---|---|
-| Legibilidade do Código |  10  |
-| Documentação do código |  10  |
-| Documentação da solução |  10  |
-| Tratamento de Erros | 10 | 
-| Total | 40 |
-
-A sua pontuação será a soma dos valores obtidos nos critérios acima.
-
-## Diferenciais 
-
-Você pode aumentar a sua pontuação no processo de seleção implementando um ou mais dos itens abaixo:
-
-| Item  | Pontos Ganhos | 
-|---|---|
-| Criar um [serviço](https://martinfowler.com/articles/microservices.html) com o problema |  30  |
-| Utilizar banco de dados |  30  |
-| Implementar Clean Code |  20  |
-| Implementar o padrão de programação da tecnologia escolhida |  20  |
-| Qualidade de [Código com SonarQube](https://about.sonarcloud.io/) |  15  |
-| Implementar testes unitários |  15  |
-| Implementar testes comportamentais |  15  |
-| Implementar integração com [Github Action](https://github.com/features/actions)  |  10  |
-| Implementar integração com Github Action + SonarQube |  10  |
-| Implementar usando Docker | 5 |
-| Total| 170 |
-
-Na sua nota final serâo acrescidos os pontos referentes aos itens implementados corretamente.
-
-## Penalizações
-
-Você será desclassifiado nas seguintes situações:
-
-1. Se submeter um solução que não funcione; 
-2. Se não cumprir os critérios presentes no seção **Avaliação**;
-3. Se cometer plágio.
+O sistema é uma solução eficiente e simples para realizar buscas entre candidatos e concursos públicos. Ele utiliza arquivos de texto como fonte de dados e apresenta um menu interativo no terminal para facilitar a interação do usuário.
